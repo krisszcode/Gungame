@@ -17,9 +17,12 @@ namespace Gungame.GungameData
         {
             
         }
-        public Player GetWinner()
+        public  Player GetWinner()
         {
-            
+            Card asd 
+            asd = CompareCard
+            if asdequals player1card 
+                    return player1
         }
     }
 }

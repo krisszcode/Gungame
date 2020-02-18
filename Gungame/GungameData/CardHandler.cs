@@ -11,11 +11,17 @@ namespace Gungame.GungameData
         {
 
         }
+
         public List<Card> Dealer(Player player)
         {
 
         }
         
+        public void LoadFromCSV() 
+        {
+
+        }
+
     }
 
 }

@@ -4,15 +4,17 @@ using System.Text;
 
 namespace Gungame.GungameData
 {
-
-    abstract class Card
+    class Card
     {
         public string name;
         public int armorpen;
+
         public Card(string name,int armorpen)
         {
             this.name = name;
             this.armorpen = armorpen;
         }
+
+
     }
 }
