@@ -15,19 +15,16 @@ namespace Gungame.GungameData
         }
         public Card CompareCard(Card card1, Card card2)
         {
-            
+            return null;
         }
         public  Player GetWinner()
         {
-            Card asd 
-            asd = CompareCard
-            if asdequals player1card 
-                    return player1
+            return null;
         }
 
         public Card ChooseCard(Player player)
         {
-
+            return null;
         }
     }
 }

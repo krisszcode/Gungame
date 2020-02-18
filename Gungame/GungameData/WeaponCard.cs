@@ -11,5 +11,10 @@ namespace Gungame.GungameData
         {
             this.fireRate = fireRate;
         }
+
+        public override string ToString()
+        {
+            return base.ToString() + $"FireRate: {this.fireRate}";
+        }
     }
 }

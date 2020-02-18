@@ -15,6 +15,9 @@ namespace Gungame.GungameData
             this.armorpen = armorpen;
         }
 
-
+        public override string ToString()
+        {
+            return $"Name: {this.name}{Environment.NewLine}Armorpen: {this.armorpen}{Environment.NewLine}";
+        }
     }
 }

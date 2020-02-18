@@ -11,6 +11,11 @@ namespace Gungame.GungameData
         {
            this.sharpness = sharpness;
         }
+
+        public override string ToString()
+        {
+            return base.ToString() + $"Sharpness: {this.sharpness}";
+        }
     }
 
 }
