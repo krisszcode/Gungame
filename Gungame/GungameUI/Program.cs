@@ -2,7 +2,7 @@
 using Gungame.GungameData;
 
 
-namespace Gungame.GungameUI
+namespace Gungame
 {
     class Program
     {

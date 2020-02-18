@@ -77,7 +77,7 @@ namespace Gungame.GungameUI
         }
 
 
-        public string AskPlayerName()
+        public static string AskPlayerName()
         {
             Console.WriteLine("Please tell us your name: ");
             string userinput = Console.ReadLine();
@@ -86,7 +86,7 @@ namespace Gungame.GungameUI
 
        
 
-        public string AskCardFromHand(Player player)
+        public static  string AskCardFromHand(Player player)
         {
             Console.WriteLine($"Cards in your hand:{Environment.NewLine}");
 
@@ -100,8 +100,7 @@ namespace Gungame.GungameUI
             return userinput;
 
         }
-
-        public string AskAttribute()
+        public static string AskAttribute()
         {
             Console.WriteLine("Please input the attribute you want to choose: ");
             string userinput = Console.ReadLine();

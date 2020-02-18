@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Runtime;
+using Gungame.GungameUI;
 
 namespace Gungame.GungameData
 {
@@ -13,20 +14,31 @@ namespace Gungame.GungameData
             Card player1Card;
             Card player2Card;
             
-            Console.WriteLine("1. player choose a card you want to play by typing in its name!");
-            nameOfCard = Console.ReadLine();
-            player1Card = deck.GetCardByName(player1.hand, nameOfCard);
-            Console.WriteLine("2. player choose a card you want to play by typing in its name!");
-            nameOfCard = Console.ReadLine();
-            player2Card=deck.GetCardByName(player2.hand, nameOfCard);
+            
+            player1Card = deck.GetCardByName(player1.hand, UserInterface.AskCardFromHand(player1));
+            player2Card = deck.GetCardByName(player2.hand, UserInterface.AskCardFromHand(player2));
             Table round = new Table(player1Card, player2Card);
-            round.GetWinner();
+            if (player1.wonBefore == true)
+            {
+
+                round.GetWinner();
+            }
+            else
+            {
+
+            }
         }
         public void RunProgramWith1v1()
         {
-            int lastTimeWon = 1;
-            Player player1 = new Player()
-
+            CardHandler cardHandler = new CardHandler();
+            CSVHandler csvHandler = new CSVHandler();
+            csvHandler.CsvHandler("Cards.csv");
+            cardHandler.deck = csvHandler.listOfCards;
+            string playerName = UserInterface.AskPlayerName();
+            Player player1 = new Player(playerName, cardHandler.Dealer());
+            player1.wonBefore = true;
+            playerName = UserInterface.AskPlayerName();
+            Player player2 = new Player(playerName, cardHandler.Dealer());
 
         }
     }
