@@ -13,14 +13,14 @@ namespace Gungame.GungameData
         protected int GenerateRandomNumber()
         {
             Random rnd = new Random();
-            return rnd.Next(0, 33);
+            return rnd.Next(0, deck.Count+1);
             //Out of range exception itt !!
         }
 
         public List<Card> Dealer()
         {
             List<Card> playerHand = new List<Card>();
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 4; i++)
             {
                 Card card = deck[GenerateRandomNumber()];
                 playerHand.Add(card);
