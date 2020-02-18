@@ -2,13 +2,13 @@
 using Gungame.GungameData;
 
 
-namespace Gungame
+namespace Gungame.GungameUI
 {
     class Program
     {
         static void Main(string[] args)
         {
-<<<<<<< Updated upstream
+
            UserInterface ui = new UserInterface();
 
             while (true)
@@ -27,9 +27,7 @@ namespace Gungame
                     Console.Clear();
                 }
             }
-=======
-           
->>>>>>> Stashed changes
+
         }
     }
 }

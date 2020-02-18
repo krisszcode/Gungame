@@ -101,6 +101,13 @@ namespace Gungame.GungameUI
 
         }
 
+        public string AskAttribute()
+        {
+            Console.WriteLine("Please input the attribute you want to choose: ");
+            string userinput = Console.ReadLine();
+            return userinput;
+        }
+
 
     }
 }

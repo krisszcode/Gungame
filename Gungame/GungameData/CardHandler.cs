@@ -13,12 +13,13 @@ namespace Gungame.GungameData
         protected int GenerateRandomNumber()
         {
             Random rnd = new Random();
-            return rnd.Next(0, 33);
+            return rnd.Next(0, deck.Count+1);
 
         }
 
         public void Dealer(Player player1, Player player2)
         {
+            
 
             for (int i = 0; i < 5; i++)
             {
