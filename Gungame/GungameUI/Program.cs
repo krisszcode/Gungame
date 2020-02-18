@@ -8,11 +8,24 @@ namespace Gungame
     {
         static void Main(string[] args)
         {
-            
-            
-            
+           UserInterface ui = new UserInterface();
 
-            Console.WriteLine("Hello World!");
+            while (true)
+            {
+                ui.HandleMenu();
+                try
+                {
+                    ui.Choose();
+                }
+                catch (InvalidOperationException)
+
+                {
+                    Console.WriteLine("Wrong input! Try again.");
+                    Console.WriteLine("Press enter to continue.");
+                    Console.ReadKey();
+                    Console.Clear();
+                }
+            }
         }
     }
 }
