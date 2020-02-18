@@ -17,7 +17,7 @@ namespace Gungame.GungameData
             this.wonHands = wonHands;
         }
 
-
+       
     }
     
 }

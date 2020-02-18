@@ -9,7 +9,7 @@ namespace Gungame.GungameUI
     class UserInterface
     {
         
-      RoundSimulator simulator = new RoundSimulator();
+      Simulator simulator = new Simulator();
         public void PrintMenu(string title, string[] list, string exitmessage)
         {
 
@@ -119,9 +119,19 @@ namespace Gungame.GungameUI
         public  void PrintWinner(string winner)
         {
             Console.Clear();
-            Console.WriteLine("The winner is: " + winner + "!");
+            Console.WriteLine("The round winner is: " + winner + "!");
             Console.WriteLine("\nPress enter to start the next round.");
             Console.ReadKey();
+        }
+
+
+        public void PrintGameWinner(Player player)
+        {
+            Console.Clear();
+            Console.WriteLine("The GAME winner is: " + player.name + "! GG.");
+            Console.WriteLine("\nPress enter to return the main menu.");
+            Console.ReadKey();
+            Console.Clear();
         }
 
 

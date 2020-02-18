@@ -6,9 +6,22 @@ using Gungame.GungameUI;
 
 namespace Gungame.GungameData
 {
-    class RoundSimulator
+    class Simulator
     {
-        
+        public Player GetWinner(Player player1, Player player2)
+        {
+            if (player1.wonHands < player2.wonHands)
+            {
+                return player2;
+            }
+            else if (player1.wonHands > player2.wonHands)
+            {
+                return player1;
+            }
+            throw new InvalidOperationException("szar");
+        }
+
+
         public void SimulateRound(Player player1, Player player2,CardHandler deck)
         {
             UserInterface ui = new UserInterface();
@@ -75,11 +88,19 @@ namespace Gungame.GungameData
             player1.wonBefore = true;
             string player2Name = ui.AskPlayer2Name();
             Player player2 = new Player(player2Name, cardHandler.Dealer());
-            for (int i = 0; i < 5; i++)
+
+            int Index = 0;
+            //player1.hand.Count > 0 && player2.hand.Count > 0 && cardHandler.deck.Count > 0
+            while (Index < 5)
             {
                 SimulateRound(player1, player2, cardHandler);
+                Index++;
             }
-            
+
+            ui.PrintGameWinner(GetWinner(player1, player2));
+
+
+            // UPDATE: lefut jól, kiirja a játék winnert a végén. Amit kell csinálni: új lapot húzni a kör végén, plusz kitörölni a kézből a használt lapot a kör végén
             
         }
     }
