@@ -8,8 +8,10 @@ namespace Gungame.GungameData
 {
     class RoundSimulator
     {
+        
         public void SimulateRound(Player player1, Player player2,CardHandler deck)
         {
+            UserInterface ui = new UserInterface();
             string nameOfCard;
             Card player1Card;
             Card player2Card;
@@ -21,9 +23,9 @@ namespace Gungame.GungameData
             string winnerName;
             if (player1.wonBefore == true)
             {
-                player1Card = deck.GetCardByName(player1.hand, UserInterface.AskCardFromHand(player1));
-                attribute = UserInterface.AskAttribute();
-                player2Card = deck.GetCardByName(player2.hand, UserInterface.AskCardFromHand(player2));
+                player1Card = deck.GetCardByName(player1.hand, ui.AskCardFromHand(player1));
+                attribute = ui.AskAttribute();
+                player2Card = deck.GetCardByName(player2.hand, ui.AskCardFromHand(player2));
                 Table round = new Table(player1Card, player2Card);
                 winnerName = round.GetWinner(player1,player2,attribute).name;
 
@@ -34,9 +36,9 @@ namespace Gungame.GungameData
             }
             else
             {
-                player2Card = deck.GetCardByName(player2.hand, UserInterface.AskCardFromHand(player2));
-                attribute = UserInterface.AskAttribute();
-                player1Card = deck.GetCardByName(player1.hand, UserInterface.AskCardFromHand(player1));
+                player2Card = deck.GetCardByName(player2.hand, ui.AskCardFromHand(player2));
+                attribute = ui.AskAttribute();
+                player1Card = deck.GetCardByName(player1.hand, ui.AskCardFromHand(player1));
                 Table round = new Table(player1Card, player2Card);
                 winnerName = round.GetWinner(player1, player2, attribute).name;
                
@@ -56,21 +58,22 @@ namespace Gungame.GungameData
                 player2.wonHands++;
                 player1.wonBefore = false;
             }
-           
-            UserInterface.PrintWinner(winnerName);
+
+            ui.PrintWinner(winnerName);
 
         }
         public void RunProgramWith1v1()
         {
+            UserInterface ui = new UserInterface();
             Console.Clear();
             CardHandler cardHandler = new CardHandler();
             CSVHandler csvHandler = new CSVHandler();
             csvHandler.CsvHandler("Cards.csv");
             cardHandler.deck = csvHandler.listOfCards;
-            string playerName = UserInterface.AskPlayerName();
+            string playerName = ui.AskPlayerName();
             Player player1 = new Player(playerName, cardHandler.Dealer());
             player1.wonBefore = true;
-            string player2Name = UserInterface.AskPlayer2Name();
+            string player2Name = ui.AskPlayer2Name();
             Player player2 = new Player(player2Name, cardHandler.Dealer());
             for (int i = 0; i < 5; i++)
             {

@@ -77,7 +77,7 @@ namespace Gungame.GungameUI
         }
 
 
-        public static string AskPlayerName()
+        public  string AskPlayerName()
         {
             Console.WriteLine("Player1, please tell us your name: ");
             string userinput = Console.ReadLine();
@@ -85,7 +85,7 @@ namespace Gungame.GungameUI
             return userinput;
         }
 
-        public static string AskPlayer2Name()
+        public  string AskPlayer2Name()
         {
             Console.WriteLine("Player2, please tell us your name: ");
             string userinput = Console.ReadLine();
@@ -94,7 +94,7 @@ namespace Gungame.GungameUI
         }
 
 
-        public static  string AskCardFromHand(Player player)
+        public   string AskCardFromHand(Player player)
         {
             Console.Clear();
             Console.WriteLine($"{player.name}, cards in your hand:{Environment.NewLine}");
@@ -109,14 +109,14 @@ namespace Gungame.GungameUI
             return userinput;
 
         }
-        public static string AskAttribute()
+        public  string AskAttribute()
         {
             Console.WriteLine("Please input the attribute you want to choose: ");
             string userinput = Console.ReadLine();
             return userinput;
         }
 
-        public static void PrintWinner(string winner)
+        public  void PrintWinner(string winner)
         {
             Console.Clear();
             Console.WriteLine("The winner is: " + winner + "!");
