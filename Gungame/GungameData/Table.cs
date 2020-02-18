@@ -24,5 +24,10 @@ namespace Gungame.GungameData
             if asdequals player1card 
                     return player1
         }
+
+        public Card ChooseCard(Player player)
+        {
+
+        }
     }
 }
