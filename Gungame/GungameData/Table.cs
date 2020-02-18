@@ -27,7 +27,7 @@ namespace Gungame.GungameData
                     return Player2Card;
                 }
             }
-            else if(Player1Card is KnifeCard && Player2Card is KnifeCard && attribute == "sharpness")
+            else if(Player1Card is KnifeCard && Player2Card is KnifeCard && attribute.ToLower() == "sharpness")
             {
                 if ((Player1Card as KnifeCard).sharpness > (Player2Card as KnifeCard).sharpness)
                 {
@@ -36,7 +36,7 @@ namespace Gungame.GungameData
                 else return Player2Card;
                 
             }
-            else if(Player1Card is WeaponCard && Player2Card is WeaponCard && attribute == "firerate")
+            else if(Player1Card is WeaponCard && Player2Card is WeaponCard && attribute.ToLower() == "firerate")
             {
                 if ((Player1Card as WeaponCard).fireRate > (Player2Card as WeaponCard).fireRate)
                 {
@@ -44,7 +44,7 @@ namespace Gungame.GungameData
                 }
                 else return Player2Card;
             }
-            else if (attribute == "armorpen")
+            else if (attribute.ToLower() == "armorpen")
             {
                 if (Player1Card.armorpen > Player2Card.armorpen)
                 {
@@ -88,5 +88,16 @@ namespace Gungame.GungameData
         {
 
         }*/
+
+        public void RemoveUsedCardAfterRound(Player player,Card card1)
+        {
+            foreach (Card card2 in player.hand)
+            {
+                if (card2.name.Equals(card1.name))
+                {
+                    player.hand.Remove(card2);
+                }
+            }
+        }
     }
 }

@@ -13,7 +13,7 @@ namespace Gungame.GungameData
         protected int GenerateRandomNumber()
         {
             Random rnd = new Random();
-            return rnd.Next(0, deck.Count+1);
+            return rnd.Next(0, deck.Count);
             //Out of range exception itt !!
         }
 
@@ -42,6 +42,7 @@ namespace Gungame.GungameData
             throw new Exception("Nemjó");
         }
        
+      
 
     }
 

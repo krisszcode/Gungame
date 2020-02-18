@@ -26,6 +26,8 @@ namespace Gungame.GungameData
                 player2Card = deck.GetCardByName(player2.hand, UserInterface.AskCardFromHand(player2));
                 Table round = new Table(player1Card, player2Card);
                 winnerName = round.GetWinner(player1,player2,attribute).name;
+                round.RemoveUsedCardAfterRound(player1, player1Card);
+                round.RemoveUsedCardAfterRound(player2, player2Card);
             }
             else
             {
@@ -34,6 +36,8 @@ namespace Gungame.GungameData
                 player1Card = deck.GetCardByName(player1.hand, UserInterface.AskCardFromHand(player1));
                 Table round = new Table(player1Card, player2Card);
                 winnerName = round.GetWinner(player1, player2, attribute).name;
+                round.RemoveUsedCardAfterRound(player1, player1Card);
+                round.RemoveUsedCardAfterRound(player2, player2Card);
             }
             if(winnerName == player1.name)
             {
@@ -47,9 +51,13 @@ namespace Gungame.GungameData
                 player2.wonHands++;
                 player1.wonBefore = false;
             }
+
+            UserInterface.PrintWinner(winnerName);
+            
         }
         public void RunProgramWith1v1()
         {
+            Console.Clear();
             CardHandler cardHandler = new CardHandler();
             CSVHandler csvHandler = new CSVHandler();
             csvHandler.CsvHandler("Cards.csv");
@@ -57,8 +65,8 @@ namespace Gungame.GungameData
             string playerName = UserInterface.AskPlayerName();
             Player player1 = new Player(playerName, cardHandler.Dealer());
             player1.wonBefore = true;
-            playerName = UserInterface.AskPlayerName();
-            Player player2 = new Player(playerName, cardHandler.Dealer());
+            string player2Name = UserInterface.AskPlayer2Name();
+            Player player2 = new Player(player2Name, cardHandler.Dealer());
             for (int i = 0; i < 5; i++)
             {
                 SimulateRound(player1, player2, cardHandler);

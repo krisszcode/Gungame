@@ -79,16 +79,25 @@ namespace Gungame.GungameUI
 
         public static string AskPlayerName()
         {
-            Console.WriteLine("Please tell us your name: ");
+            Console.WriteLine("Player1, please tell us your name: ");
             string userinput = Console.ReadLine();
+            Console.Clear();
             return userinput;
         }
 
-       
+        public static string AskPlayer2Name()
+        {
+            Console.WriteLine("Player2, please tell us your name: ");
+            string userinput = Console.ReadLine();
+            Console.Clear();
+            return userinput;
+        }
+
 
         public static  string AskCardFromHand(Player player)
         {
-            Console.WriteLine($"Cards in your hand:{Environment.NewLine}");
+            Console.Clear();
+            Console.WriteLine($"{player.name}, cards in your hand:{Environment.NewLine}");
 
             foreach (Card card in player.hand)
             {
@@ -105,6 +114,14 @@ namespace Gungame.GungameUI
             Console.WriteLine("Please input the attribute you want to choose: ");
             string userinput = Console.ReadLine();
             return userinput;
+        }
+
+        public static void PrintWinner(string winner)
+        {
+            Console.Clear();
+            Console.WriteLine("The winner is: " + winner + "!");
+            Console.WriteLine("\nPress enter to start the next round.");
+            Console.ReadKey();
         }
 
 
