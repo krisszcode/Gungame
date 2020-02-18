@@ -14,14 +14,14 @@ namespace Gungame.GungameData
             Player1Card = player1card;
             Player2Card = player2card;
         }
-        public Card CompareCard()
+        public Card CompareCard(string attribute)
         {
 
             
         }
-        public  Player GetWinner(Player player1 , Player player2)
+        public  Player GetWinner(Player player1 , Player player2, string attribute)
         {
-            Card wonCard = CompareCard();
+            Card wonCard = CompareCard(attribute);
             
             if (wonCard.Equals(Player1Card)) {
                 return player1;

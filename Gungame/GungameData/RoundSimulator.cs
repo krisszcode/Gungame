@@ -16,12 +16,15 @@ namespace Gungame.GungameData
             
             
             player1Card = deck.GetCardByName(player1.hand, UserInterface.AskCardFromHand(player1));
-            player2Card = deck.GetCardByName(player2.hand, UserInterface.AskCardFromHand(player2));
-            Table round = new Table(player1Card, player2Card);
+
+            string attribute;
+            
             if (player1.wonBefore == true)
             {
-
-                round.GetWinner();
+                attribute = UserInterface.AskAttribute();
+                player2Card = deck.GetCardByName(player2.hand, UserInterface.AskCardFromHand(player2));
+                Table round = new Table(player1Card, player2Card);
+                round.GetWinner(player1,player2,attribute);
             }
             else
             {
