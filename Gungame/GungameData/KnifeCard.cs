@@ -1,0 +1,18 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace Gungame.GungameData
+{
+    class KnifeCard : Card
+    {
+        public int sharpness;
+        public KnifeCard(string name, int armorpen, int sharpness) : base(name,armorpen)
+        {
+            this.name = name;
+            this.armorpen = armorpen;
+            this.sharpness = sharpness;
+        }
+    }
+
+}
