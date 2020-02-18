@@ -26,8 +26,11 @@ namespace Gungame.GungameData
                 player2Card = deck.GetCardByName(player2.hand, UserInterface.AskCardFromHand(player2));
                 Table round = new Table(player1Card, player2Card);
                 winnerName = round.GetWinner(player1,player2,attribute).name;
-                round.RemoveUsedCardAfterRound(player1, player1Card);
-                round.RemoveUsedCardAfterRound(player2, player2Card);
+
+               // player1.hand = round.RemoveUsedCardAfterRound(player1, player1Card);
+               // player2.hand = round.RemoveUsedCardAfterRound(player2, player2Card);    ket fele verzioval probaltam, mind a ketto errorozik
+                // round.RemoveUsedCardAfterRound(player2, player2Card);
+
             }
             else
             {
@@ -36,10 +39,12 @@ namespace Gungame.GungameData
                 player1Card = deck.GetCardByName(player1.hand, UserInterface.AskCardFromHand(player1));
                 Table round = new Table(player1Card, player2Card);
                 winnerName = round.GetWinner(player1, player2, attribute).name;
-                round.RemoveUsedCardAfterRound(player1, player1Card);
-                round.RemoveUsedCardAfterRound(player2, player2Card);
+               
+                //round.RemoveUsedCardAfterRound(player1, player1Card);
+                //round.RemoveUsedCardAfterRound(player2, player2Card);
+
             }
-            if(winnerName == player1.name)
+            if (winnerName == player1.name)
             {
                 player1.wonBefore = true;
                 player1.wonHands++;
@@ -51,9 +56,9 @@ namespace Gungame.GungameData
                 player2.wonHands++;
                 player1.wonBefore = false;
             }
-
+           
             UserInterface.PrintWinner(winnerName);
-            
+
         }
         public void RunProgramWith1v1()
         {

@@ -89,15 +89,23 @@ namespace Gungame.GungameData
 
         }*/
 
-        public void RemoveUsedCardAfterRound(Player player,Card card1)
+        public List<Card> RemoveUsedCardAfterRound(Player player,Card card1)
         {
+            List<Card> temp = new List<Card>();
             foreach (Card card2 in player.hand)
             {
-                if (card2.name.Equals(card1.name))
+                temp.Add(card2);
+                foreach (Card card in temp)
                 {
-                    player.hand.Remove(card2);
+                    if (card.name.Equals(card1.name))
+                    {
+                        temp.Remove(card);
+                    }
+
                 }
+                
             }
+            return temp;
         }
     }
 }
