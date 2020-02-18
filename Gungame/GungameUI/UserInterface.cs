@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
+using Gungame.GungameData;
 
 namespace Gungame.GungameUI
 {
@@ -73,6 +75,32 @@ namespace Gungame.GungameUI
                 Console.Clear();
             }
         }
+
+
+        public string AskPlayerName()
+        {
+            Console.WriteLine("Please tell us your name: ");
+            string userinput = Console.ReadLine();
+            return userinput;
+        }
+
+       
+
+        public string AskCardFromHand(Player player)
+        {
+            Console.WriteLine($"Cards in your hand:{Environment.NewLine}");
+
+            foreach (Card card in player.hand)
+            {
+                Console.WriteLine(card+$"{Environment.NewLine}");
+            }
+
+            Console.WriteLine("Please tell us which card you want to choose from your hand: ");
+            string userinput = Console.ReadLine();
+            return userinput;
+
+        }
+
 
     }
 }
