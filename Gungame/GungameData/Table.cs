@@ -13,18 +13,28 @@ namespace Gungame.GungameData
             Player1Card = player1card;
             Player2Card = player2card;
         }
-        public Card CompareCard(Card card1, Card card2)
+        public Card CompareCard()
         {
-            return null;
+
+            
         }
-        public  Player GetWinner()
+        public  Player GetWinner(Player player1 , Player player2)
         {
-            return null;
+            Card wonCard = CompareCard();
+            
+            if (wonCard.Equals(Player1Card)) {
+                return player1;
+                    }
+            else if (wonCard.Equals(Player2Card))
+            {
+                return player2;
+            }
+
         }
 
-        public Card ChooseCard(Player player)
+        /*public Card ChooseCard(Player player)
         {
-            return null;
-        }
+
+        }*/
     }
 }

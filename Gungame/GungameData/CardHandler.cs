@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-
+using System.Runtime;
 namespace Gungame.GungameData
 {
     class CardHandler
@@ -34,7 +34,17 @@ namespace Gungame.GungameData
                 deck.Remove(card);
             }
         }
-        
+        public Card GetCardByName(List<Card> hand,string name)
+        {
+            foreach(Card card in hand)
+            {
+                if (card.name.ToLower().Equals(name.ToLower()))
+                {
+                    return card;
+                }
+            }
+            throw new Exception("Nemjó");
+        }
        
 
     }
