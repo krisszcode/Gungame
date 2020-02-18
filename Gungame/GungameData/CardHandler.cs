@@ -14,7 +14,7 @@ namespace Gungame.GungameData
         {
             Random rnd = new Random();
             return rnd.Next(0, 33);
-
+            //Out of range exception itt !!
         }
 
         public List<Card> Dealer()

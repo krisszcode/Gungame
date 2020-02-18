@@ -15,20 +15,37 @@ namespace Gungame.GungameData
             Card player2Card;
             
             
-            player1Card = deck.GetCardByName(player1.hand, UserInterface.AskCardFromHand(player1));
+            
 
             string attribute;
-            
+            string winnerName;
             if (player1.wonBefore == true)
             {
+                player1Card = deck.GetCardByName(player1.hand, UserInterface.AskCardFromHand(player1));
                 attribute = UserInterface.AskAttribute();
                 player2Card = deck.GetCardByName(player2.hand, UserInterface.AskCardFromHand(player2));
                 Table round = new Table(player1Card, player2Card);
-                round.GetWinner(player1,player2,attribute);
+                winnerName = round.GetWinner(player1,player2,attribute).name;
             }
             else
             {
-
+                player2Card = deck.GetCardByName(player2.hand, UserInterface.AskCardFromHand(player2));
+                attribute = UserInterface.AskAttribute();
+                player1Card = deck.GetCardByName(player1.hand, UserInterface.AskCardFromHand(player1));
+                Table round = new Table(player1Card, player2Card);
+                winnerName = round.GetWinner(player1, player2, attribute).name;
+            }
+            if(winnerName == player1.name)
+            {
+                player1.wonBefore = true;
+                player1.wonHands++;
+                player2.wonBefore = false;
+            }
+            else
+            {
+                player2.wonBefore = true;
+                player2.wonHands++;
+                player1.wonBefore = false;
             }
         }
         public void RunProgramWith1v1()
@@ -42,7 +59,12 @@ namespace Gungame.GungameData
             player1.wonBefore = true;
             playerName = UserInterface.AskPlayerName();
             Player player2 = new Player(playerName, cardHandler.Dealer());
-
+            for (int i = 0; i < 5; i++)
+            {
+                SimulateRound(player1, player2, cardHandler);
+            }
+            
+            
         }
     }
 }

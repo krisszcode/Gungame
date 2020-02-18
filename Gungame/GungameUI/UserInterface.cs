@@ -56,7 +56,7 @@ namespace Gungame.GungameUI
             }
             else if (option == "2")
             {
-                simulator.RunProgramWithAI();
+                //simulator.RunProgramWithAI();
             }
             else if (option == "0")
             {
