@@ -29,8 +29,13 @@ namespace Gungame.GungameData
         public void DealACardToHand(Player player)
         {
             Card card = deck[GenerateRandomNumber()];
-            player.hand.Add(card);
-            deck.Remove(card);
+            if (deck.Count > 0)
+            {
+                player.hand.Add(card);
+                deck.Remove(card);
+
+            }
+            
         }
 
         public void RoundEndDeal(Card playedCard,Player player)

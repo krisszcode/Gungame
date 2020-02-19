@@ -140,7 +140,7 @@ namespace Gungame.GungameData
 
             int Index = 0;
             // Index < 3
-            while (player1.hand.Count > 0 && player2.hand.Count > 0 && cardHandler.deck.Count > 0)
+            while (player1.hand.Count > 0 && player2.hand.Count > 0)
             {
                 SimulateRound(player1, player2, cardHandler);
                 Index++;
