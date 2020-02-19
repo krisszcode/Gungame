@@ -33,6 +33,7 @@ namespace Gungame.GungameData
             string winnerName;
             if (player1.wonBefore == true)
             {
+                ui.PrintStartingPlayer(player1);
                 while (true)
                 {
                     try
@@ -69,6 +70,7 @@ namespace Gungame.GungameData
             }
             else
             {
+                ui.PrintStartingPlayer(player2);
                 while (true)
                 {
                     try
@@ -134,6 +136,7 @@ namespace Gungame.GungameData
             player1.wonBefore = true;
             string player2Name = ui.AskPlayer2Name();
             Player player2 = new Player(player2Name, cardHandler.FirstHandDealer());
+            ui.OsztingCars();
 
             int Index = 0;
             // Index < 3

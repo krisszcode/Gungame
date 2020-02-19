@@ -33,6 +33,7 @@ namespace Gungame.GungameUI
                     "1vsAI",
                     "More than 2 players"
             };
+            Console.WriteLine("Welcome to Gungame!\n");
             PrintMenu("Main menu", options, "Exit program");
         }
 
@@ -160,6 +161,22 @@ namespace Gungame.GungameUI
                 Console.WriteLine(card + "\n");
                 Console.WriteLine("\nThe chosen attribute  is: "+attribute+"\n");
             }
+        }
+
+        public void OsztingCars()
+        {
+            Console.Clear();
+            Console.WriteLine("Shuffling the deck, and dealing cards, please wait...");
+            Thread.Sleep(2400);
+            Console.Clear();
+        }
+
+        public void PrintStartingPlayer(Player player)
+        {
+            Console.Clear();
+            Console.WriteLine($"{player.name} is starting! ");
+            Thread.Sleep(1500);
+            Console.Clear();
         }
     }
 }
