@@ -149,12 +149,129 @@ namespace Gungame.GungameData
             ui.PrintGameWinner(GetWinner(player1, player2));
         }
 
-        public void SimulateRoundWithAI()
+
+
+
+        /****
+        AI starts here
+        ****/
+
+
+        public void SimulateRoundWithAI(Player player1, AI ai, CardHandler deck)
         {
+            Console.WriteLine("DEBUG: AI handje: \n");
+            foreach (Card card in ai.hand)
+            {
+                Console.WriteLine(card);
+            }
+            Console.ReadKey();
+
+            UserInterface ui = new UserInterface();
+            string nameOfCard;
+            Card player1Card;
+            Card aiCard;
+            string attribute;
+            string winnerName;
+
+            if (player1.wonBefore == true)
+            {
+                ui.PrintStartingPlayer(player1);
+                ui.PrintGameStatus(player1, ai);
+
+                while (true)
+                {
+                    try
+                    {
+                        player1Card = deck.GetCardByName(player1.hand, ui.AskCardFromHand(player1));
+                        attribute = ui.AskAttribute();
+                        break;
+                    }
+                    catch (Exception)
+                    {
+                        Console.WriteLine("\nWrong input, please try again...\n");
+                        Thread.Sleep(1500);
+                        continue;
+                    }
+                }
+                
+                aiCard = ai.ChooseTheRightCardForAI(player1Card, attribute);
+                ui.PrintAIChosenCard(aiCard);
+              
+                Table round = new Table(player1Card, aiCard);
+                winnerName = round.GetRoundWinner(player1, ai, attribute).name;
+                deck.RoundEndDeal(player1Card, player1);
+                deck.RoundEndDeal(aiCard, ai);
+            }
+            else
+            {
+                ui.PrintStartingPlayer(ai);
+                ui.PrintGameStatus(player1, ai);
+                
+                aiCard = ai.ChooseCardToPlay();
+                attribute = ai.ReturnBestAttribute(aiCard);
+
+               
+                    
+                
+                while (true)
+                {
+                    try
+                    {
+                        player1Card = deck.GetCardByName(player1.hand, ui.AskCardFromHand(player1, aiCard, attribute));
+                        break;
+                    }
+                    catch (Exception)
+                    {
+                        Console.WriteLine("\nWrong input, please try again...\n");
+                        Thread.Sleep(1500);
+                        continue;
+                    }
+                }
+                Table round = new Table(player1Card, aiCard);
+                winnerName = round.GetRoundWinner(player1, ai, attribute).name;
+                deck.RoundEndDeal(player1Card, player1);
+                deck.RoundEndDeal(aiCard, ai);
+            }
+            if (winnerName == player1.name)
+            {
+                player1.wonBefore = true;
+                player1.wonHands++;
+                ai.wonBefore = false;
+            }
+            else
+            {
+                ai.wonBefore = true;
+                ai.wonHands++;
+                player1.wonBefore = false;
+            }
+
+            ui.PrintWinner(winnerName);
         }
 
         public void RunProgramWithAI()
         {
+            UserInterface ui = new UserInterface();
+            Console.Clear();
+            CardHandler cardHandler = new CardHandler();
+            CSVHandler csvHandler = new CSVHandler();
+            csvHandler.CsvHandler("Cards.csv");
+            cardHandler.deck = csvHandler.listOfCards;
+            string playerName = ui.AskPlayerName();
+            Player player1 = new Player(playerName, cardHandler.FirstHandDealer());
+            player1.wonBefore = true;
+ 
+            AI ai = new AI(cardHandler.FirstHandDealer());
+            ui.OsztingCars();
+
+            int Index = 0;
+            // Index < 3
+            while (player1.hand.Count > 0 && ai.hand.Count > 0)
+            {
+                SimulateRoundWithAI(player1, ai, cardHandler);
+                Index++;
+            }
+            ui.PrintGameWinner(GetWinner(player1, ai));
+
         }
 
 

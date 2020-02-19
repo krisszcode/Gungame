@@ -1,14 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Gungame.GungameData
 {
     class AI : Player
     {
-        public AI( List<Card> hand, string name = "ai", int wonHands = 0, bool wonBefore = false) : base(name, hand, wonHands, wonBefore)
+        public AI(List<Card> hand, string name = "ai", int wonHands = 0, bool wonBefore = false) : base(name, hand, wonHands, wonBefore)
         {
         }
+
+
+        // methods for the AI if the player starts the round 
 
         public string KnifeOrWep(Card enemyPlayed)
         {
@@ -21,9 +25,9 @@ namespace Gungame.GungameData
         public List<Card> GetKnifeFromHand()
         {
             List<Card> temp = new List<Card>();
-            foreach(Card aiCard in hand)
+            foreach (Card aiCard in hand)
             {
-                if(aiCard is KnifeCard)
+                if (aiCard is KnifeCard)
                 {
                     temp.Add(aiCard);
                 }
@@ -42,7 +46,7 @@ namespace Gungame.GungameData
             }
             return temp;
         }
-        public bool AttributeCheck(Card aiCard,Card enemyCard, string attribute)
+        public bool AttributeCheck(Card aiCard, Card enemyCard, string attribute)
         {
             if (KnifeOrWep(enemyCard).Equals("weapon"))
             {
@@ -68,11 +72,11 @@ namespace Gungame.GungameData
                 }
                 else return false;
             }
-            else 
+            else
             {
-                
+
                 if (aiCard is KnifeCard)
-                {  
+                {
                     if (attribute.Equals("armorpen"))
                     {
                         if (aiCard.armorpen > enemyCard.armorpen)
@@ -111,18 +115,173 @@ namespace Gungame.GungameData
         }
 
 
-        public Card ChooseTheRightCardForAI(Card enemycard,string attribute)
+        public Card ChooseTheRightCardForAI(Card enemycard, string attribute)
         {
-            for (int  i = 0;  i < hand.Count;  i++)
+            for (int i = 0; i < hand.Count; i++)
             {
                 if (AttributeCheck(enemycard, hand[i], attribute) == true)
                 {
                     return hand[i];
                 }
-                
+
             }
             return FalseBranch();
         }
 
+
+        //methods for the AI if the Ai starts the round
+
+
+
+        /// <summary>
+        ///  Megnézi, hogy melyik típusú lapból van neki több, majd abból választ,
+        ///  amiből több van, azért, hogy ha a player rak olyat, amiből kevés van neki, akkor tudjon mit rakni rá, és ne bukja el.
+        ///  
+        /// Amelyik tipusú kártyából több van, azokat a típusú kártyákat belerakom egy listába, és használom a következő képpen:
+        ///  
+        /// Megnézi minden egyes kártyánál, hogy melyik statja jobb, és azt választja ki,
+        /// ezt úgy kapjuk meg, hogy beadom a két értéket egy listába, és veszem a max értékét a listának.
+        /// 
+        /// Az aktuális kártya nevét, és max/jobb értékét(a két stat közül választva) elmentem egy dictionarybe key(név)/Value(max érték).
+        /// 
+        /// Majd megkeresem a dictionary valuek közül a legnagyobbat, és annak a nevét használva megkeresem a kezébe azt a kártyát,
+        /// aminek a neve hasonló, és visszaadom
+        /// </summary>
+        /// <returns>Card to play in the round</returns>
+        public Card ChooseCardToPlay()
+        {
+            // inner method to get the max num from a list
+            int Max(List<int> list)
+            {
+                int max = 0;
+
+                for (int i = 0; i < list.Count; i++)
+                {
+                    if (list[i] > max)
+                    {
+                        max = list[i];
+                    }
+                }
+                return max;
+            }
+            // ends here.
+
+
+            List<Card> weapons = new List<Card>();
+            List<Card> knives = new List<Card>();
+
+            foreach (Card card in hand)
+            {
+                if (card is WeaponCard)
+                {
+                    weapons.Add(card);
+                }
+                else
+                {
+                    knives.Add(card);
+                }
+            }
+
+            if (weapons.Count > knives.Count)
+            {
+                Dictionary<string, int> CardAndMaximumValue = new Dictionary<string, int>();
+
+                foreach (WeaponCard card in weapons)
+                {
+                    List<int> DecideMax = new List<int>();
+                    DecideMax.Add(card.armorpen);
+                    DecideMax.Add(card.fireRate);
+                    CardAndMaximumValue.Add(card.name, Max(DecideMax));
+                }
+                int MaxNumFromDic = CardAndMaximumValue.Values.Max();
+                string BestCard = CardAndMaximumValue.FirstOrDefault(x => x.Value == MaxNumFromDic).Key;
+
+                foreach (Card card in hand)
+                {
+                    if (card.name.Equals(BestCard))
+                    {
+                        return card; // returns the best weapon card
+                    }
+                }
+            }
+            else if (weapons.Count < knives.Count)
+            {
+                Dictionary<string, int> CardAndMaximumValue = new Dictionary<string, int>();
+
+                foreach (KnifeCard card in knives)
+                {
+                    List<int> DecideMax = new List<int>();
+                    DecideMax.Add(card.armorpen);
+                    DecideMax.Add(card.sharpness);
+                    CardAndMaximumValue.Add(card.name, Max(DecideMax));
+                }
+                int MaxNumFromDic = CardAndMaximumValue.Values.Max();
+                string BestCard = CardAndMaximumValue.FirstOrDefault(x => x.Value == MaxNumFromDic).Key;
+
+                foreach (Card card in hand)
+                {
+                    if (card.name.Equals(BestCard))
+                    {
+                        return card; // returns the best knife card
+                    }
+                }
+            }
+            throw new Exception();
+        }
+
+     
+
+
+        public string ReturnBestAttribute(Card card)
+        {
+
+            string ChooseAttributeForKnife(KnifeCard card)
+            {
+                int CardArmorPen = ChooseCardToPlay().armorpen;
+
+                KnifeCard knife = (KnifeCard)ChooseCardToPlay();
+                int CardSharpness = knife.sharpness;
+
+                if (CardArmorPen > CardSharpness)
+                {
+                    return "armorpen";
+                }
+                else if (CardArmorPen < CardSharpness)
+                {
+                    return "sharpness";
+                }
+                throw new Exception();
+            }
+
+
+             string ChooseAttributeForWeapon(WeaponCard card)
+            {
+                int CardArmorPen = ChooseCardToPlay().armorpen;
+
+                WeaponCard weapon = (WeaponCard)ChooseCardToPlay();
+                int CardFireRate = weapon.fireRate;
+
+                if (CardArmorPen > CardFireRate)
+                {
+                    return "armorpen";
+                }
+                else if (CardArmorPen < CardFireRate)
+                {
+                    return "firerate";
+                }
+                throw new Exception();
+            }
+
+
+            if (card is WeaponCard)
+            {
+                return ChooseAttributeForWeapon((WeaponCard)card);
+            }
+            else if (card is KnifeCard)
+            {
+               return ChooseAttributeForKnife((KnifeCard)card);
+            }
+            throw new Exception();
+        }
     }
 }

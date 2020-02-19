@@ -51,7 +51,7 @@ namespace Gungame.GungameUI
             }
             else if (option == "2")
             {
-                //simulator.RunProgramWithAI();
+                simulator.RunProgramWithAI();
             }
             else if (option == "3")
             {
@@ -183,6 +183,34 @@ namespace Gungame.GungameUI
         {
             Console.WriteLine($"\nThe current stat is:  {player1.name}: {player1.wonHands} --- {player2.name}: {player2.wonHands}\n");
             Thread.Sleep(2000);
+        }
+
+        public void PrintAIChosenCard(Card card)
+        {
+            if(card is KnifeCard)
+            {
+                Console.Clear();
+                Console.WriteLine("The AI chosen the following Card: \n" + (KnifeCard)card);
+                Console.WriteLine("\nPress enter to continue.");
+                Console.ReadKey();
+
+            }
+            else
+            {
+                Console.Clear();
+                Console.WriteLine("The AI chosen the following Card: \n" + (WeaponCard)card);
+                Console.WriteLine("\nPress enter to continue.");
+                Console.ReadKey();
+            }
+           
+        }
+
+        public void PrintAIChosenAttribute(string att)
+        {
+            Console.Clear();
+            Console.WriteLine("The AI chosen the following Arribute: " + att);
+            Thread.Sleep(1500);
+
         }
     }
 }
