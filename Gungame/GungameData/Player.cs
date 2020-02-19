@@ -9,13 +9,14 @@ namespace Gungame.GungameData
         public string name;
         public int wonHands;
         public List<Card> hand;
-        public bool wonBefore = false;
+        public bool wonBefore;
 
-        public Player(string name , List<Card> hand, int wonHands = 0)
+        public Player(string name , List<Card> hand, int wonHands = 0, bool wonBefore = false)
         {
             this.name = name; 
             this.hand = hand;
             this.wonHands = wonHands;
+            this.wonBefore = wonBefore;
         }
 
         public void RemoveACardFromHand(Card card)
