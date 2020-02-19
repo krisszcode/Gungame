@@ -23,15 +23,15 @@ namespace Gungame.GungameData
         }
 
 
-        public void SimulateRound(Player player1, Player player2,CardHandler deck)
+        public void SimulateRound(Player player1, Player player2, CardHandler deck)
         {
             UserInterface ui = new UserInterface();
             string nameOfCard;
             Card player1Card;
             Card player2Card;
-            
-            
-            
+
+
+
 
             string attribute;
             string winnerName;
@@ -42,7 +42,7 @@ namespace Gungame.GungameData
                     try
                     {
                         player1Card = deck.GetCardByName(player1.hand, ui.AskCardFromHand(player1));
-                        attribute = ui.AskAttribute();                    
+                        attribute = ui.AskAttribute();
                         break;
                     }
                     catch (Exception)
@@ -50,7 +50,7 @@ namespace Gungame.GungameData
                         Console.WriteLine("\nWrong input, please try again...\n");
                         Thread.Sleep(1500);
                         continue;
-                    }              
+                    }
                 }
                 while (true)
                 {
@@ -77,7 +77,7 @@ namespace Gungame.GungameData
                 {
                     try
                     {
-                       
+
                         player2Card = deck.GetCardByName(player2.hand, ui.AskCardFromHand(player2));
                         attribute = ui.AskAttribute();
                         break;
@@ -151,7 +151,17 @@ namespace Gungame.GungameData
 
 
             // UPDATE: lefut jól, kiirja a játék winnert a végén. Amit kell csinálni: új lapot húzni a kör végén, plusz kitörölni a kézből a használt lapot a kör végén
-            
+
         }
+
+        public void SimulateRoundWithAI()
+        {
+        }
+
+        public void RunProgramWithAI()
+        {
+        }
+
+
     }
 }
