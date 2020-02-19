@@ -8,7 +8,6 @@ namespace Gungame.GungameUI
     {
         static void Main(string[] args)
         {
-
            UserInterface ui = new UserInterface();
 
             while (true)
@@ -19,12 +18,10 @@ namespace Gungame.GungameUI
                     ui.Choose();
                 }
                 catch (InvalidOperationException)
-
                 {
                     Console.WriteLine("anydxd");
                 }
             }
-
         }
     }
 }

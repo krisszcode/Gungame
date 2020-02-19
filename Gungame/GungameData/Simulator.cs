@@ -29,10 +29,6 @@ namespace Gungame.GungameData
             string nameOfCard;
             Card player1Card;
             Card player2Card;
-
-
-
-
             string attribute;
             string winnerName;
             if (player1.wonBefore == true)
@@ -123,8 +119,8 @@ namespace Gungame.GungameData
             }
 
             ui.PrintWinner(winnerName);
-
         }
+
         public void RunProgramWith1v1()
         {
             UserInterface ui = new UserInterface();
@@ -146,7 +142,6 @@ namespace Gungame.GungameData
                 SimulateRound(player1, player2, cardHandler);
                 Index++;
             }
-
             ui.PrintGameWinner(GetWinner(player1, player2));
         }
 

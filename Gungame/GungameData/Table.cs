@@ -9,11 +9,13 @@ namespace Gungame.GungameData
     {
         Card Player1Card { get; set; }
         Card Player2Card { get; set; }
+
         public Table(Card player1card , Card player2card)
         {
             Player1Card = player1card;
             Player2Card = player2card;
         }
+
         public Card CompareCard(string attribute,string wonBefore)
         {
             if(Player1Card is KnifeCard && Player2Card is WeaponCard || Player1Card is WeaponCard && Player2Card is KnifeCard)
@@ -54,6 +56,8 @@ namespace Gungame.GungameData
             }
             throw new Exception("Szar az egész");
         }
+
+
         public  Player GetRoundWinner(Player player1 , Player player2, string attribute)
         {
             string wonBefore = getWonBeforePlayer(player1, player2);
@@ -68,8 +72,8 @@ namespace Gungame.GungameData
                 return player2;
             }
             else throw new Exception("full szar");
-
         }
+
 
         public string getWonBeforePlayer(Player player1, Player player2)
         {
@@ -81,13 +85,7 @@ namespace Gungame.GungameData
             {
                 return "player2";
             }
-
         }
-
-        /*public Card ChooseCard(Player player)
-        {
-
-        }*/
 
         public List<Card> RemoveUsedCardAfterRound(Player player,Card card1)
         {
@@ -101,9 +99,7 @@ namespace Gungame.GungameData
                     {
                         temp.Remove(card);
                     }
-
                 }
-                
             }
             return temp;
         }

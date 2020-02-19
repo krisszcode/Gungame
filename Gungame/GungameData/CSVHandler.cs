@@ -8,22 +8,23 @@ namespace Gungame.GungameData
     class CSVHandler
     {
         public List<Card> listOfCards = new List<Card>();
+
         public void CsvHandler(string path)
         {
             var weapons = new List<WeaponCard>();
             var knieves = new List<KnifeCard>();
-            
             string name;
             int attribute1;
             int attribute2;
             using (var rd = new StreamReader(path))
             {
                 int linecounter = 0;
+
                 while (!rd.EndOfStream)
                 {
                     linecounter++;
-                    
                     var line = rd.ReadLine();
+
                     if(line.Contains("Knife"))
                     { 
                         var values = line.Split(',');

@@ -17,5 +17,4 @@ namespace Gungame.GungameData
             return base.ToString() + $"Sharpness: {this.sharpness}";
         }
     }
-
 }

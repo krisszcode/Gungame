@@ -8,11 +8,9 @@ namespace Gungame.GungameUI
 {
     class UserInterface
     {
-
         Simulator simulator = new Simulator();
         public void PrintMenu(string title, string[] list, string exitmessage)
         {
-
             Console.WriteLine(title + $":{Environment.NewLine}");
             int counter = 0;
 
@@ -21,7 +19,6 @@ namespace Gungame.GungameUI
                 counter++;
                 Console.WriteLine(" (" + Convert.ToString(counter) + ") " + option);
             }
-
             Console.WriteLine(" (0) " + exitmessage);
         }
 
@@ -30,15 +27,12 @@ namespace Gungame.GungameUI
         /// </summary>
         public void HandleMenu()
         {
-
             string[] options = new string[]
             {
                     "1vs1",
                     "1vsAI",
                     "More than 2 players"
-
             };
-
             PrintMenu("Main menu", options, "Exit program");
         }
 
@@ -47,7 +41,6 @@ namespace Gungame.GungameUI
         /// </summary>
         public void Choose()
         {
-
             Console.WriteLine("\nPlease enter a number: ");
             string option = Console.ReadLine();
 
@@ -69,7 +62,6 @@ namespace Gungame.GungameUI
                 TimeSpan ts = new TimeSpan(0, 0, 2);
                 Console.WriteLine("Exiting...");
                 Thread.Sleep(ts);
-
                 Environment.Exit(0);
             }
             else
@@ -110,12 +102,11 @@ namespace Gungame.GungameUI
             }
 
             PrintChosenCardByPlayers(card2,attribute);
-
             Console.WriteLine("Please tell us which card you want to choose from your hand: ");
             string userinput = Console.ReadLine();
             return userinput;
-
         }
+
         public string AskAttribute()
         {
             bool ValidAttribute(string attribute)
@@ -129,9 +120,7 @@ namespace Gungame.GungameUI
                 {
                     return false;
                 }
-
             }
-
             Console.WriteLine("Please input the attribute you want to choose: ");
             string userinput = Console.ReadLine();
             if (ValidAttribute(userinput) == true)
@@ -142,8 +131,6 @@ namespace Gungame.GungameUI
             {
                 throw new Exception();
             }
-
-            
         }
 
         public void PrintWinner(string winner)
@@ -172,12 +159,7 @@ namespace Gungame.GungameUI
                 Console.WriteLine("\nThe chosen card by the other player is: \n");
                 Console.WriteLine(card + "\n");
                 Console.WriteLine("\nThe chosen attribute  is: "+attribute+"\n");
-
             }
-           
-
         }
-        
-
     }
 }
