@@ -92,7 +92,7 @@ namespace Gungame.GungameUI
         }
 
 
-        public string AskCardFromHand(Player player,Card card2 = null,string attribute = null)
+        public string AskCardFromHand(Player player, Card card2 = null, string attribute = null)
         {
             Console.Clear();
             Console.WriteLine($"{player.name}, cards in your hand:{Environment.NewLine}");
@@ -102,7 +102,7 @@ namespace Gungame.GungameUI
                 Console.WriteLine(card + $"{Environment.NewLine}");
             }
 
-            PrintChosenCardByPlayers(card2,attribute);
+            PrintChosenCardByPlayers(card2, attribute);
             Console.WriteLine("Please tell us which card you want to choose from your hand: ");
             string userinput = Console.ReadLine();
             return userinput;
@@ -153,13 +153,13 @@ namespace Gungame.GungameUI
         }
 
 
-        public void PrintChosenCardByPlayers(Card card,string attribute)
+        public void PrintChosenCardByPlayers(Card card, string attribute)
         {
             if (card != null)
             {
                 Console.WriteLine("\nThe chosen card by the other player is: \n");
                 Console.WriteLine(card + "\n");
-                Console.WriteLine("\nThe chosen attribute  is: "+attribute+"\n");
+                Console.WriteLine("\nThe chosen attribute  is: " + attribute + "\n");
             }
         }
 
@@ -177,6 +177,12 @@ namespace Gungame.GungameUI
             Console.WriteLine($"{player.name} is starting! ");
             Thread.Sleep(1500);
             Console.Clear();
+        }
+
+        public void PrintGameStatus(Player player1, Player player2)
+        {
+            Console.WriteLine($"\nThe current stat is:  {player1.name}: {player1.wonHands} --- {player2.name}: {player2.wonHands}\n");
+            Thread.Sleep(2000);
         }
     }
 }

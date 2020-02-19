@@ -9,12 +9,10 @@ namespace Gungame.GungameData
         public List<Card> deck = new List<Card>();
         
 
-
         protected int GenerateRandomNumber()
         {
             Random rnd = new Random();
-            return rnd.Next(0, deck.Count);
-            
+            return rnd.Next(0, deck.Count);          
         }
 
         public List<Card> FirstHandDealer()
@@ -26,14 +24,11 @@ namespace Gungame.GungameData
                 playerHand.Add(card);
                 deck.Remove(card);
             }
-            return playerHand;
-
-            
+            return playerHand;  
         }
+
         public void DealACardToHand(Player player)
         {
-
-            
             if (deck.Count > 0)
             {
                 Card card = deck[GenerateRandomNumber()];
@@ -41,12 +36,13 @@ namespace Gungame.GungameData
                 deck.Remove(card);
             }
         }
+
         public void RoundEndDeal(Card playedCard,Player player)
         {
             player.RemoveACardFromHand(playedCard);
             DealACardToHand(player);
-
         }
+
         public Card GetCardByName(List<Card> hand,string name)
         {
             foreach(Card card in hand)
@@ -57,10 +53,6 @@ namespace Gungame.GungameData
                 }
             }
             throw new Exception();
-        }
-
-       
-
+        }      
     }
-
 }

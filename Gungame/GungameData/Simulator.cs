@@ -34,6 +34,7 @@ namespace Gungame.GungameData
             if (player1.wonBefore == true)
             {
                 ui.PrintStartingPlayer(player1);
+                ui.PrintGameStatus(player1, player2);
                 while (true)
                 {
                     try
@@ -71,6 +72,7 @@ namespace Gungame.GungameData
             else
             {
                 ui.PrintStartingPlayer(player2);
+                ui.PrintGameStatus(player1, player2);
                 while (true)
                 {
                     try
@@ -83,7 +85,6 @@ namespace Gungame.GungameData
                     catch (Exception)
                     {
                         Console.WriteLine("\nWrong input, please try again...\n");
-                        TimeSpan span = new TimeSpan();
                         Thread.Sleep(1500);
                         continue;
                     }
