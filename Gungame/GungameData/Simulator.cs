@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Runtime;
 using Gungame.GungameUI;
+using System.Threading;
 
 namespace Gungame.GungameData
 {
@@ -36,30 +37,77 @@ namespace Gungame.GungameData
             string winnerName;
             if (player1.wonBefore == true)
             {
-                player1Card = deck.GetCardByName(player1.hand, ui.AskCardFromHand(player1));
-                attribute = ui.AskAttribute();
-                player2Card = deck.GetCardByName(player2.hand, ui.AskCardFromHand(player2));
-                Table round = new Table(player1Card, player2Card);
-                winnerName = round.GetRoundWinner(player1,player2,attribute).name;
-                deck.RoundEndDeal(player1Card, player1);
-                deck.RoundEndDeal(player2Card, player2);
-                //player1.hand = round.RemoveUsedCardAfterRound(player1, player1Card);
-                //player2.hand = round.RemoveUsedCardAfterRound(player2, player2Card);    /*ket fele verzioval probaltam, mind a ketto errorozik*/
-                // round.RemoveUsedCardAfterRound(player2, player2Card);
-
-            }
-            else
-            {
-                player2Card = deck.GetCardByName(player2.hand, ui.AskCardFromHand(player2));
-                attribute = ui.AskAttribute();
-                player1Card = deck.GetCardByName(player1.hand, ui.AskCardFromHand(player1));
+                while (true)
+                {
+                    try
+                    {
+                        player1Card = deck.GetCardByName(player1.hand, ui.AskCardFromHand(player1));
+                        attribute = ui.AskAttribute();                    
+                        break;
+                    }
+                    catch (Exception)
+                    {
+                        Console.WriteLine("\nWrong input, please try again...\n");
+                        Thread.Sleep(1500);
+                        continue;
+                    }              
+                }
+                while (true)
+                {
+                    try
+                    {
+                        player2Card = deck.GetCardByName(player2.hand, ui.AskCardFromHand(player2, player1Card, attribute));
+                        break;
+                    }
+                    catch (Exception)
+                    {
+                        Console.WriteLine("\nWrong input, please try again...\n");
+                        Thread.Sleep(1500);
+                        continue;
+                    }
+                }
                 Table round = new Table(player1Card, player2Card);
                 winnerName = round.GetRoundWinner(player1, player2, attribute).name;
                 deck.RoundEndDeal(player1Card, player1);
                 deck.RoundEndDeal(player2Card, player2);
-                //round.RemoveUsedCardAfterRound(player1, player1Card);
-                //round.RemoveUsedCardAfterRound(player2, player2Card);
-
+            }
+            else
+            {
+                while (true)
+                {
+                    try
+                    {
+                       
+                        player2Card = deck.GetCardByName(player2.hand, ui.AskCardFromHand(player2));
+                        attribute = ui.AskAttribute();
+                        break;
+                    }
+                    catch (Exception)
+                    {
+                        Console.WriteLine("\nWrong input, please try again...\n");
+                        TimeSpan span = new TimeSpan();
+                        Thread.Sleep(1500);
+                        continue;
+                    }
+                }
+                while (true)
+                {
+                    try
+                    {
+                        player1Card = deck.GetCardByName(player1.hand, ui.AskCardFromHand(player1, player2Card, attribute));
+                        break;
+                    }
+                    catch (Exception)
+                    {
+                        Console.WriteLine("\nWrong input, please try again...\n");
+                        Thread.Sleep(1500);
+                        continue;
+                    }
+                }
+                Table round = new Table(player1Card, player2Card);
+                winnerName = round.GetRoundWinner(player1, player2, attribute).name;
+                deck.RoundEndDeal(player1Card, player1);
+                deck.RoundEndDeal(player2Card, player2);
             }
             if (winnerName == player1.name)
             {

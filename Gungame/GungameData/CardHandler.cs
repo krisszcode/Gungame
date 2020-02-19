@@ -52,10 +52,10 @@ namespace Gungame.GungameData
                     return card;
                 }
             }
-            throw new Exception("Nemjó");
+            throw new Exception();
         }
+
        
-      
 
     }
 
