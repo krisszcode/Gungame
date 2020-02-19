@@ -35,6 +35,7 @@ namespace Gungame.GungameUI
             {
                     "1vs1",
                     "1vsAI",
+                    "More than 2 players"
 
             };
 
@@ -57,6 +58,10 @@ namespace Gungame.GungameUI
             else if (option == "2")
             {
                 //simulator.RunProgramWithAI();
+            }
+            else if (option == "3")
+            {
+                //Krisz;
             }
             else if (option == "0")
             {

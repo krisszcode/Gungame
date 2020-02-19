@@ -140,18 +140,14 @@ namespace Gungame.GungameData
             Player player2 = new Player(player2Name, cardHandler.FirstHandDealer());
 
             int Index = 0;
-            //player1.hand.Count > 0 && player2.hand.Count > 0 && cardHandler.deck.Count > 0
-            while (Index < 3)
+            // Index < 3
+            while (player1.hand.Count > 0 && player2.hand.Count > 0 && cardHandler.deck.Count > 0)
             {
                 SimulateRound(player1, player2, cardHandler);
                 Index++;
             }
 
             ui.PrintGameWinner(GetWinner(player1, player2));
-
-
-            // UPDATE: lefut jól, kiirja a játék winnert a végén. Amit kell csinálni: új lapot húzni a kör végén, plusz kitörölni a kézből a használt lapot a kör végén
-
         }
 
         public void SimulateRoundWithAI()
