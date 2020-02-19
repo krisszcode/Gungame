@@ -14,10 +14,10 @@ namespace Gungame.GungameData
         {
             Random rnd = new Random();
             return rnd.Next(0, deck.Count);
-            //Out of range exception itt !!
+            
         }
 
-        public List<Card> Dealer()
+        public List<Card> FirstHandDealer()
         {
             List<Card> playerHand = new List<Card>();
             for (int i = 0; i < 4; i++)
@@ -29,6 +29,19 @@ namespace Gungame.GungameData
             return playerHand;
 
             
+        }
+        public void DealACardToHand(Player player)
+        {
+
+            Card card = deck[GenerateRandomNumber()];
+            player.hand.Add(card);
+            deck.Remove(card);
+        }
+        public void RoundEndDeal(Card playedCard,Player player)
+        {
+            player.RemoveACardFromHand(playedCard);
+            DealACardToHand(player);
+
         }
         public Card GetCardByName(List<Card> hand,string name)
         {

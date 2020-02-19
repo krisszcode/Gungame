@@ -16,6 +16,18 @@ namespace Gungame.GungameData
             this.hand = hand;
             this.wonHands = wonHands;
         }
+        public void RemoveACardFromHand(Card card)
+        {
+            foreach(Card handCard in hand)
+            {
+                if (card.name.Equals(handCard.name))
+                {
+                    hand.Remove(handCard);
+                    break;
+                }
+            }
+        }
+        
 
        
     }

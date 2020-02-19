@@ -54,7 +54,7 @@ namespace Gungame.GungameData
             }
             throw new Exception("Szar az egész");
         }
-        public  Player GetWinner(Player player1 , Player player2, string attribute)
+        public  Player GetRoundWinner(Player player1 , Player player2, string attribute)
         {
             string wonBefore = getWonBeforePlayer(player1, player2);
             Card wonCard = CompareCard(attribute,wonBefore);
