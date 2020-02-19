@@ -22,9 +22,10 @@ namespace Gungame.GungameData
                 while (!rd.EndOfStream)
                 {
                     linecounter++;
-                    if (linecounter < 17)
-                    {
-                        var line = rd.ReadLine();
+                    
+                    var line = rd.ReadLine();
+                    if(line.Contains("Knife"))
+                    { 
                         var values = line.Split(',');
                         name = values[0];
                         attribute1 = Int32.Parse(values[1]);
@@ -35,7 +36,6 @@ namespace Gungame.GungameData
                     }
                     else
                     {
-                        var line = rd.ReadLine();
                         var values = line.Split(',');
                         name = values[0];
                         attribute1 = Int32.Parse(values[1]);
