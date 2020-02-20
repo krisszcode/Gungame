@@ -11,7 +11,11 @@ namespace Gungame.GungameData
         {
             this.fireRate = fireRate;
         }
-
+        /// <summary>
+        /// Prints out a weaponcard's attribute:
+        /// FireRate: (firerate)
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             return base.ToString() + $"FireRate: {this.fireRate}";

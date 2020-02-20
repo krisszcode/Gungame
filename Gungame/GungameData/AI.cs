@@ -11,9 +11,12 @@ namespace Gungame.GungameData
         {
         }
 
-
         // methods for the AI if the player starts the round 
-
+        /// <summary>
+        /// Returns if a given card played by the 1. player is a weapon or a knife.
+        /// </summary>
+        /// <param name="enemyPlayed"></param>
+        /// <returns></returns>
         public string KnifeOrWep(Card enemyPlayed)
         {
             if (enemyPlayed is KnifeCard)
@@ -22,6 +25,10 @@ namespace Gungame.GungameData
             }
             else return "weapon";
         }
+        /// <summary>
+        /// Returns a list of cards which contains the knives that the ai has in its hand.
+        /// </summary>
+        /// <returns></returns>
         public List<Card> GetKnifeFromHand()
         {
             List<Card> temp = new List<Card>();
@@ -34,6 +41,10 @@ namespace Gungame.GungameData
             }
             return temp;
         }
+        /// <summary>
+        /// Returns a list of cards which contains the weapons that the ai has in its hand.
+        /// </summary>
+        /// <returns></returns>
         public List<Card> GetWepFromHand()
         {
             List<Card> temp = new List<Card>();
@@ -46,14 +57,26 @@ namespace Gungame.GungameData
             }
             return temp;
         }
+        /// <summary>
+        /// This method checks if there is a card that the ai could win the round with.
+        /// Returns true or false.
+        /// </summary>
+        /// <param name="aiCard"></param>
+        /// <param name="enemyCard"></param>
+        /// <param name="attribute"></param>
+        /// <returns></returns>
         public bool AttributeCheck(Card aiCard, Card enemyCard, string attribute)
         {
+            //Checks if the enemy's card is a weapon or a knife.
             if (KnifeOrWep(enemyCard).Equals("weapon"))
             {
+                //Checks if the current ai's card and the enemy's card is the same type
                 if (aiCard is WeaponCard)
                 {
+                    //Checks the attribute given by the player
                     if (attribute.Equals("armorpen"))
                     {
+                        //Checks if the ai's card's given attribute is better than the enemy's card attribute.
                         if (aiCard.armorpen > enemyCard.armorpen)
                         {
                             return true;
@@ -74,7 +97,6 @@ namespace Gungame.GungameData
             }
             else
             {
-
                 if (aiCard is KnifeCard)
                 {
                     if (attribute.Equals("armorpen"))
@@ -99,10 +121,15 @@ namespace Gungame.GungameData
                 else return false;
             }
         }
+        /// <summary>
+        /// This executes if the ai doesn't have a card that could win the round.
+        /// </summary>
+        /// <returns></returns>
         public Card FalseBranch()
         {
             List<Card> weaponCards = GetWepFromHand();
             List<Card> knifeCards = GetKnifeFromHand();
+            //Returns a card with a type ,that the ai has more than 2 of.
             if (weaponCards.Count > knifeCards.Count)
             {
                 return weaponCards[0];
@@ -111,20 +138,29 @@ namespace Gungame.GungameData
             {
                 return knifeCards[0];
             }
+            //If the ai has 2 of both types of cards returns the first card in its hand . 
             else return hand[0];
         }
-
-
+        /// <summary>
+        /// This method separates the 2 branches :
+        /// -if the ai has a better card than what was played, so it can win
+        /// -if the ai can't win 
+        /// </summary>
+        /// <param name="enemycard"></param>
+        /// <param name="attribute"></param>
+        /// <returns></returns>
         public Card ChooseTheRightCardForAI(Card enemycard, string attribute)
         {
             for (int i = 0; i < hand.Count; i++)
             {
                 if (AttributeCheck(hand[i],enemycard, attribute) == true)
                 {
+                    //ai wins
                     return hand[i];
                 }
 
             }
+            //ai can't win
             return FalseBranch();
         }
 
@@ -230,19 +266,27 @@ namespace Gungame.GungameData
 
             }
         }
-
+        /// <summary>
+        /// Returns the best knife card that the ai could play .
+        /// </summary>
+        /// <param name="BestCard"></param>
+        /// <returns></returns>
         public Card GetBestChoice(string BestCard)
         {
             foreach (Card card in hand)
             {
                 if (card.name.Equals(BestCard))
                 {
-                    return card; // returns the best knife card
+                    return card; 
                 }
             }
             throw new Exception("Random exception");
         }
-
+        /// <summary>
+        /// Gives back a list with the weapon cards attributes in the ai's hand.
+        /// </summary>
+        /// <param name="weaponCard"></param>
+        /// <returns></returns>
         public List<int> GetWeaponCardAttributes(WeaponCard weaponCard)
         {
             List<int> DecideMaxWep = new List<int>();
@@ -250,7 +294,11 @@ namespace Gungame.GungameData
             DecideMaxWep.Add(weaponCard.fireRate);
             return DecideMaxWep;
         }
-
+        /// <summary>
+        /// Gives back a list with the knife cards attributes in the ai's hand.
+        /// </summary>
+        /// <param name="knifeCard"></param>
+        /// <returns></returns>
         public List<int> GetKnifeCardAttributes(KnifeCard knifeCard)
         {
             List<int> DecideMaxKnife = new List<int>();
@@ -258,10 +306,14 @@ namespace Gungame.GungameData
             DecideMaxKnife.Add(knifeCard.sharpness);
             return DecideMaxKnife;
         }
-
+        /// <summary>
+        /// Returns the card's attribute in string form, that the ai should choose.
+        /// </summary>
+        /// <param name="card"></param>
+        /// <returns></returns>
         public string ReturnBestAttribute(Card card)
         {
-
+            // In case of a knifecard, chooses armorpen or sharpness, depending on which is a higher number.
             string ChooseAttributeForKnife(KnifeCard card)
             {
                 int CardArmorPen = ChooseCardToPlay().armorpen;
@@ -279,8 +331,8 @@ namespace Gungame.GungameData
                 }
                 throw new Exception();
             }
-
-             string ChooseAttributeForWeapon(WeaponCard card)
+            // In case of a weaponcard, chooses armorpen or firerate, depending on which is a higher number.
+            string ChooseAttributeForWeapon(WeaponCard card)
             {
                 int CardArmorPen = ChooseCardToPlay().armorpen;
 

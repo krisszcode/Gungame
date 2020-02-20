@@ -14,7 +14,13 @@ namespace Gungame.GungameData
             this.name = name;
             this.armorpen = armorpen;
         }
-
+        /// <summary>
+        /// Prints out a card in this way:
+        /// Name:(name)
+        /// armorpen:(armorpen)
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             return $"Name: {this.name}{Environment.NewLine}Armorpen: {this.armorpen}{Environment.NewLine}";

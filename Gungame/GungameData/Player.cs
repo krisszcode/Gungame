@@ -18,7 +18,10 @@ namespace Gungame.GungameData
             this.wonHands = wonHands;
             this.wonBefore = wonBefore;
         }
-
+        /// <summary>
+        /// Removes card given as a parameter from the player's hand.
+        /// </summary>
+        /// <param name="card"></param>
         public void RemoveACardFromHand(Card card)
         {
             foreach(Card handCard in hand)

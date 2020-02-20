@@ -8,7 +8,10 @@ namespace Gungame.GungameData
     class CSVHandler
     {
         public List<Card> listOfCards = new List<Card>();
-
+        /// <summary>
+        /// Reads out the cards from a given csv file, and puts them in the listOfCards field.
+        /// </summary>
+        /// <param name="path"></param>
         public void CsvHandler(string path)
         {
             var weapons = new List<WeaponCard>();

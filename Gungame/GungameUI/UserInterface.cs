@@ -9,6 +9,12 @@ namespace Gungame.GungameUI
     class UserInterface
     {
         Simulator simulator = new Simulator();
+        /// <summary>
+        /// Prints out the menupoints.
+        /// </summary>
+        /// <param name="title"></param>
+        /// <param name="list"></param>
+        /// <param name="exitmessage"></param>
         public void PrintMenu(string title, string[] list, string exitmessage)
         {
             Console.WriteLine(title + $":{Environment.NewLine}");
@@ -23,7 +29,7 @@ namespace Gungame.GungameUI
         }
 
         /// <summary>
-        /// Handling menu options nad print it out
+        /// Handling menu options and print it out
         /// </summary>
         public void HandleMenu()
         {
@@ -44,54 +50,47 @@ namespace Gungame.GungameUI
         {
             Console.WriteLine("\nPlease enter a number: ");
             string option = Console.ReadLine();
-
-            if (option == "1")
-            {
-                simulator.RunProgramWith1v1();
-            }
-            else if (option == "2")
-            {
-                simulator.RunProgramWithAI();
-            }
-            else if (option == "3")
-            {
+            switch (option) {
+                case "1":
+                    simulator.RunProgramWith1v1();
+                    break;
+                case "2":
+                    simulator.RunProgramWithAI();
+                    break;
+                case "3":
                 //Krisz;
-            }
-            else if (option == "0")
-            {
-
-                TimeSpan ts = new TimeSpan(0, 0, 2);
-                Console.WriteLine("Exiting...");
-                Thread.Sleep(ts);
-                Environment.Exit(0);
-            }
-            else
-            {
-                Console.WriteLine("Wrong input! Try again.");
-                Console.WriteLine("Press enter to continue.");
-                Console.ReadKey();
-                Console.Clear();
+                case "0":
+                    TimeSpan ts = new TimeSpan(0, 0, 2);
+                    Console.WriteLine("Exiting...");
+                    Thread.Sleep(ts);
+                    Environment.Exit(0);
+                    break;
+                default:
+                    Console.WriteLine("Wrong input! Try again.");
+                    Console.WriteLine("Press enter to continue.");
+                    Console.ReadKey();
+                    Console.Clear();
+                    break;
             }
         }
-
-
-        public string AskPlayerName()
+        /// <summary>
+        /// Asks the name of the player.
+        /// </summary>
+        /// <returns></returns>
+        public string AskPlayerName(string playerName)
         {
-            Console.WriteLine("Player1, please tell us your name: ");
+            Console.WriteLine($"{playerName} please tell us your name: ");
             string userinput = Console.ReadLine();
             Console.Clear();
             return userinput;
         }
-
-        public string AskPlayer2Name()
-        {
-            Console.WriteLine("Player2, please tell us your name: ");
-            string userinput = Console.ReadLine();
-            Console.Clear();
-            return userinput;
-        }
-
-
+        /// <summary>
+        /// Prints out the hand and asks for a card which tha player wants to play, then returns it's name as string.
+        /// </summary>
+        /// <param name="player"></param>
+        /// <param name="card2"></param>
+        /// <param name="attribute"></param>
+        /// <returns></returns>
         public string AskCardFromHand(Player player, Card card2 = null, string attribute = null)
         {
             Console.Clear();
@@ -107,7 +106,10 @@ namespace Gungame.GungameUI
             string userinput = Console.ReadLine();
             return userinput;
         }
-
+        /// <summary>
+        /// Checks if the attribute given by the player is legit, then returns it.
+        /// </summary>
+        /// <returns></returns>
         public string AskAttribute()
         {
             bool ValidAttribute(string attribute)
@@ -133,7 +135,10 @@ namespace Gungame.GungameUI
                 throw new Exception();
             }
         }
-
+        /// <summary>
+        /// Prints out the winner of the round.
+        /// </summary>
+        /// <param name="winner"></param>
         public void PrintWinner(string winner)
         {
             Console.Clear();
@@ -141,8 +146,10 @@ namespace Gungame.GungameUI
             Console.WriteLine("\nPress enter to start the next round.");
             Console.ReadKey();
         }
-
-
+        /// <summary>
+        /// Prints out the match winner
+        /// </summary>
+        /// <param name="player"></param>
         public void PrintGameWinner(Player player)
         {
             Console.Clear();
@@ -151,8 +158,11 @@ namespace Gungame.GungameUI
             Console.ReadKey();
             Console.Clear();
         }
-
-
+        /// <summary>
+        /// Prints out the card played by the enemy and the chosen attribute.
+        /// </summary>
+        /// <param name="card"></param>
+        /// <param name="attribute"></param>
         public void PrintChosenCardByPlayers(Card card, string attribute)
         {
             if (card != null)
@@ -162,15 +172,20 @@ namespace Gungame.GungameUI
                 Console.WriteLine("\nThe chosen attribute  is: " + attribute + "\n");
             }
         }
-
-        public void OsztingCars()
+        /// <summary>
+        /// Prints out then waits.
+        /// </summary>
+        public void DealingCardsPrint()
         {
             Console.Clear();
             Console.WriteLine("Shuffling the deck, and dealing cards, please wait...");
             Thread.Sleep(2400);
             Console.Clear();
         }
-
+        /// <summary>
+        /// Prints out who'll start the next round.
+        /// </summary>
+        /// <param name="player"></param>
         public void PrintStartingPlayer(Player player)
         {
             Console.Clear();
@@ -178,13 +193,20 @@ namespace Gungame.GungameUI
             Thread.Sleep(1500);
             Console.Clear();
         }
-
+        /// <summary>
+        /// Prints out the current stats.
+        /// </summary>
+        /// <param name="player1"></param>
+        /// <param name="player2"></param>
         public void PrintGameStatus(Player player1, Player player2)
         {
             Console.WriteLine($"\nThe current stat is:  {player1.name}: {player1.wonHands} --- {player2.name}: {player2.wonHands}\n");
             Thread.Sleep(2000);
         }
-
+        /// <summary>
+        /// Prints out the card chosen by the ai.
+        /// </summary>
+        /// <param name="card"></param>
         public void PrintAIChosenCard(Card card)
         {
             if(card is KnifeCard)
@@ -202,15 +224,6 @@ namespace Gungame.GungameUI
                 Console.WriteLine("\nPress enter to continue.");
                 Console.ReadKey();
             }
-           
-        }
-
-        public void PrintAIChosenAttribute(string att)
-        {
-            Console.Clear();
-            Console.WriteLine("The AI chosen the following Arribute: " + att);
-            Thread.Sleep(1500);
-
         }
     }
 }
