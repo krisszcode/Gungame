@@ -188,22 +188,12 @@ namespace Gungame.GungameData
 
                 foreach (WeaponCard card in weapons)
                 {
-                    List<int> DecideMax = new List<int>();
-                    DecideMax.Add(card.armorpen);
-                    DecideMax.Add(card.fireRate);
-                    CardAndMaximumValue.Add(card.name, Max(DecideMax));
+                    CardAndMaximumValue.Add(card.name, Max(GetWeaponCardAttributes(card)));
                 }
                 int MaxNumFromDic = CardAndMaximumValue.Values.Max();
                 string BestCard = CardAndMaximumValue.FirstOrDefault(x => x.Value == MaxNumFromDic).Key;
 
-                foreach (Card card in hand)
-                {
-                    if (card.name.Equals(BestCard))
-                    {
-                        return card; // returns the best weapon card
-                    }
-                    
-                }
+                return GetBestChoice(BestCard);
             }
             else if (weapons.Count < knives.Count)
             {
@@ -211,23 +201,13 @@ namespace Gungame.GungameData
 
                 foreach (KnifeCard card in knives)
                 {
-                    List<int> DecideMaxKnife = new List<int>();
-                    DecideMaxKnife.Add(card.armorpen);
-                    DecideMaxKnife.Add(card.sharpness);
-                    CardAndMaximumValue.Add(card.name, Max(DecideMaxKnife));
+                    CardAndMaximumValue.Add(card.name, Max(GetKnifeCardAttributes(card)));
                 }
-                
+
                 int MaxNumFromDic = CardAndMaximumValue.Values.Max();
                 string BestCard = CardAndMaximumValue.FirstOrDefault(x => x.Value == MaxNumFromDic).Key;
 
-                foreach (Card card in hand)
-                {
-                    if (card.name.Equals(BestCard))
-                    {
-                        return card; // returns the best knife card
-                    }
-                    
-                }
+                return GetBestChoice(BestCard);
             }
             else
             {
@@ -235,39 +215,49 @@ namespace Gungame.GungameData
 
                 foreach (KnifeCard card in knives)
                 {
-                    List<int> DecideMaxKnife = new List<int>();
-                    DecideMaxKnife.Add(card.armorpen);
-                    DecideMaxKnife.Add(card.sharpness);
-                    CardAndMaximumValue.Add(card.name, Max(DecideMaxKnife));
+                    CardAndMaximumValue.Add(card.name, Max(GetKnifeCardAttributes(card)));
                 }
                 foreach (WeaponCard card in weapons)
                 {
-                    List<int> DecideMaxWep = new List<int>();
-                    DecideMaxWep.Add(card.armorpen);
-                    DecideMaxWep.Add(card.fireRate);
-                    CardAndMaximumValue.Add(card.name, Max(DecideMaxWep));
+                    CardAndMaximumValue.Add(card.name, Max(GetWeaponCardAttributes(card)));
                 }
 
 
                 int MaxNumFromDic = CardAndMaximumValue.Values.Max();
                 string BestCard = CardAndMaximumValue.FirstOrDefault(x => x.Value == MaxNumFromDic).Key;
 
-                foreach (Card card in hand)
-                {
-                    if (card.name.Equals(BestCard))
-                    {
-                        return card; // returns the best knife card
-                    }
-                    
-                }
+                return GetBestChoice(BestCard);
 
             }
-            throw new Exception("Random exception");
-            
         }
 
-     
+        public Card GetBestChoice(string BestCard)
+        {
+            foreach (Card card in hand)
+            {
+                if (card.name.Equals(BestCard))
+                {
+                    return card; // returns the best knife card
+                }
+            }
+            throw new Exception("Random exception");
+        }
 
+        public List<int> GetWeaponCardAttributes(WeaponCard weaponCard)
+        {
+            List<int> DecideMaxWep = new List<int>();
+            DecideMaxWep.Add(weaponCard.armorpen);
+            DecideMaxWep.Add(weaponCard.fireRate);
+            return DecideMaxWep;
+        }
+
+        public List<int> GetKnifeCardAttributes(KnifeCard knifeCard)
+        {
+            List<int> DecideMaxKnife = new List<int>();
+            DecideMaxKnife.Add(knifeCard.armorpen);
+            DecideMaxKnife.Add(knifeCard.sharpness);
+            return DecideMaxKnife;
+        }
 
         public string ReturnBestAttribute(Card card)
         {
@@ -290,7 +280,6 @@ namespace Gungame.GungameData
                 throw new Exception();
             }
 
-
              string ChooseAttributeForWeapon(WeaponCard card)
             {
                 int CardArmorPen = ChooseCardToPlay().armorpen;
@@ -308,7 +297,6 @@ namespace Gungame.GungameData
                 }
                 throw new Exception();
             }
-
 
             if (card is WeaponCard)
             {
